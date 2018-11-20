@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JScrollPane;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -24,12 +25,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**The main GUI for users to interact with
- * 
+ *
  * @author Wan Ikmal Fitri
  *
  */
 public class PathFindingGUI extends javax.swing.JFrame {
-    
+
 	/**
 	 * constructor
 	 */
@@ -37,23 +38,23 @@ public class PathFindingGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     /**
      * create all interactable objects
      */
     public void CreateGraphFrame(){
-	    
+
 	    //create external JFrame for Graph Creator
-	    final JFrame creategraphframe = new JFrame();  
+	    final JFrame creategraphframe = new JFrame();
 	    creategraphframe.setLayout(new BorderLayout());
 	    creategraphframe.setTitle("Graph Editor");
-	    creategraphframe.setSize(900, 910);                    
-	    creategraphframe.setLocationRelativeTo(null);        
+	    creategraphframe.setSize(900, 910);
+	    creategraphframe.setLocationRelativeTo(null);
 	    creategraphframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    creategraphframe.setVisible(true);
-	 	       
+
 	    final CreateGraph create = new CreateGraph();
-	    
+
 	    create.setPreferredSize(new java.awt.Dimension(910, 910));
         create.setLayout(new javax.swing.BoxLayout(jPanelMain, javax.swing.BoxLayout.LINE_AXIS));
         create.setBounds(0, 0, 900, 840);
@@ -62,7 +63,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
 	    JButton buttonCreate = new JButton("CREATE");
 	    buttonCreate.setBounds(10, 860, 90, 20);
 	    buttonCreate.setToolTipText("Create the graph");
-	    
+
 	    JButton buttonClear = new JButton("CLEAR");
 	    buttonClear.setBounds(10, 860, 90, 20);
 	    buttonClear.setToolTipText("Clear the Graph Editor");
@@ -71,11 +72,11 @@ public class PathFindingGUI extends javax.swing.JFrame {
 	        	create.reset();
 	        }
 	    });
-	    
+
 	    JButton buttonHelp = new JButton("HELP");
 	    buttonHelp.setToolTipText("<html>Create a node - click in any free space <br>on the framecreate a connection -<br> click once on the starting node and<br> once on the finishing node.<br> Moving a node - left click <br>and hold on a node, then <br>whilst holding move the mouse. release <br>left click button to place it <br> Deleting a node - right click on<br> the node deleting a connection<br> - same as creation<html>");
 	    buttonHelp.setBounds(10, 860, 90, 20);
-	    
+
 	    JButton buttonSave= new JButton("SAVE");
 	    buttonSave.setBounds(700, 860, 90, 20);
 	    buttonSave.setToolTipText("save the current map as a file");
@@ -85,7 +86,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
 	        	save.saveMap(create.map);
 	        }
 	    });
-	    
+
 	    JButton buttonLoad = new JButton("LOAD");
 	    buttonLoad.setBounds(800, 860, 90, 20);
 	    buttonLoad.setToolTipText("Load a previously saved map");
@@ -96,7 +97,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
 	        	create.setMap(map);
 	        }
 	    });
-	      
+
 	    JPanel panelbutton = new JPanel();
 	    panelbutton.setLayout( new FlowLayout());
 	    panelbutton.add(buttonCreate);
@@ -104,39 +105,39 @@ public class PathFindingGUI extends javax.swing.JFrame {
 	    panelbutton.add(buttonSave);
 	    panelbutton.add(buttonLoad);
 	    panelbutton.add(buttonHelp);
-	    
+
 	    buttonCreate.addActionListener(new ActionListener() {
-			
+
 	        public void actionPerformed(ActionEvent e) {
-	
-	            jPanelMain.removeAll(); 
+
+	            jPanelMain.removeAll();
 	            jPanelMain.repaint();
 	            jPanelMain.revalidate();
-	       
+
 	            gui = new GraphGUI(create.map);
 	            gui.setBackground(new Color(222,222,222));
 	            jPanelMain.add(gui);
 	            jPanelMain.setBackground(new Color(222,222,222));
 	            jPanelMain.repaint();
 	            jPanelMain.revalidate();
-	            
+
 	            creategraphframe.dispose();
 	            //creategraphframe.setVisible(false);
 	        }});
-	  
+
 	    	creategraphframe.add(panelbutton, BorderLayout.PAGE_END);
 	    	creategraphframe.add(create, BorderLayout.SOUTH);
-	       
-	       
+
+
     }
-     
+
     /**
      * put all objects into frame and add events to them
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-    	
+
         buttonGroup1 = new javax.swing.ButtonGroup();
         title1 = new javax.swing.JLabel();
         title2 = new javax.swing.JLabel();
@@ -172,9 +173,14 @@ public class PathFindingGUI extends javax.swing.JFrame {
         setTitle("PATH FINDING");
         setBackground(new java.awt.Color(254, 254, 254));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1280, 960));
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
         setResizable(false);
         getContentPane().setLayout(null);
+        setResizable(true);
+
+        JPanel container = new JPanel();
+        JScrollPane scrPane = new JScrollPane(container);
+        getContentPane().add(scrPane);
 
         title1.setFont(new java.awt.Font("Bitstream Charter", 1, 80)); // NOI18N
         title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -239,15 +245,15 @@ public class PathFindingGUI extends javax.swing.JFrame {
         );
         getContentPane().add(jPanelInstruction);
         jPanelInstruction.setBounds(12, 209, 340, 170);
-        
+
 
         buttonStartPause.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	//System.out.println("action");
             	if(!(gui.searched==true)){
-            			
+
             		System.out.println("here");
-            	
+
 	            	if(radiobuttonDFS.isSelected()){
 	            		textareaLog.append("---------------------------------------------------------------" + "\n" );
 	            		textareaLog.append("RUNNING DF SEARCH" + "\n" );
@@ -279,7 +285,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
             	}
             }
         });
-        
+
         buttonStop.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gui.resetGraph();
@@ -287,8 +293,8 @@ public class PathFindingGUI extends javax.swing.JFrame {
                 textareaLog.append("--------------------------RESET-------------------------" + "\n" );
             }
         });
-        
-        
+
+
         buttonPrevious.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!(gui.getIndex()==0)){
@@ -308,7 +314,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
                 }
             }
         });
-        
+
 
         buttonGroup1.add(radiobuttonBFS);
         radiobuttonBFS.setText("Breadth First Search");
@@ -317,7 +323,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
                 radiobuttonBFSMouseClicked(evt);
             }
         });
- 
+
         getContentPane().add(radiobuttonBFS);
         radiobuttonBFS.setBounds(30, 460, 164, 22);
 
@@ -481,7 +487,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**event for breadth first search radio button
-     * 
+     *
      * @param evt
      */
     private void radiobuttonBFSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radiobuttonBFSMouseClicked
@@ -491,7 +497,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_radiobuttonBFSMouseClicked
 
     /**event for depth first search radio button
-     * 
+     *
      * @param evt
      */
     private void radiobuttonDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobuttonDFSActionPerformed
@@ -499,7 +505,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_radiobuttonDFSActionPerformed
 
     /**event for the depth first search radio button
-     * 
+     *
      * @param evt
      */
     private void radiobuttonDFSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radiobuttonDFSMouseClicked
@@ -510,7 +516,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_radiobuttonDFSMouseClicked
 
     /**event for A* radio button
-     * 
+     *
      * @param evt
      */
     private void radioButtonAStarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioButtonAStarMouseClicked
@@ -520,7 +526,7 @@ public class PathFindingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_radioButtonAStarMouseClicked
 
     /**event for greedy radio button
-     * 
+     *
      * @param evt
      */
     private void radiobuttonGreedyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radiobuttonGreedyMouseClicked
@@ -529,23 +535,23 @@ public class PathFindingGUI extends javax.swing.JFrame {
         textareaLog.append("Checks if the current node is the goal node then\nchooses the next node via a heuristic funtion (in\nthis case, the shortest distance from the goal\nnodes location) done on all connected nodes. this\nalgorithm is optimal"+ "\n");
     }//GEN-LAST:event_radiobuttonGreedyMouseClicked
 
-    private void buttonDefaultActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void buttonDefaultActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         //remove existing panel
-    }                                             
+    }
 
-    private void buttonCreatorActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void buttonCreatorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         //open graph creator
-        CreateGraphFrame();    
-    }                                             
-    
+        CreateGraphFrame();
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-              
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -564,14 +570,14 @@ public class PathFindingGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PathFindingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PathFindingGUI().setVisible(true);
             }
         }); //final GraphGUI gui = new GraphGUI(create.map);
-        
+
         System.out.print("");
     }
 
@@ -609,5 +615,5 @@ public class PathFindingGUI extends javax.swing.JFrame {
     private javax.swing.JLabel title1;
     private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
-    
+
 }
